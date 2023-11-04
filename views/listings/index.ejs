@@ -1,0 +1,127 @@
+<% layout('layout/boiler') -%>
+<body >
+    <div class="nav-belt ">
+    <div id="filters" class="mt-3 padding-all" >
+        <div class="filter " >
+            <a href="/listings/filter/Trending" class="text-dark">
+               <div class="text-center"><i class="fa-solid fa-fire"></i></div>
+               <p class="filter-p" >Trending</p>
+            </a>
+        </div>
+        <div class="filter ">
+            <a href="/listings/filter/Rooms" class="text-dark">
+                <div class="text-center"><i class="fa fa-bed" aria-hidden="true"></i></div>
+                <p class="filter-p">rooms</p>
+            </a>
+        </div>
+        <div class="filter  ">
+            <a href="/listings/filter/Farms" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-cow"></i></div>
+                <p class="filter-p">Farms</p>
+            </a>
+        </div>
+        <div class="filter ">
+            <a href="/listings/filter/Arctic" class="text-dark">
+                <div class="text-center"><i class="fa-brands fa-galactic-republic"></i></div>
+                <p>Arctic</p>
+            </a>
+        </div>
+        <div class="filter">
+            <a href="/listings/filter/Beach" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beach</p>
+            </a>
+        </div>
+        <div class="filter hide">
+            <a href="/listings/filter/Castles" class="text-dark">
+                <div class="text-center"><i class="fa-brands fa-fort-awesome"></i></div>
+                <p>castles</p>
+            </a>
+        </div>
+        <div class="filter hide" >
+            <a href="/listings/filter/Amazing Pools" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Amazing pools</p>
+            </a>
+        </div>
+        <div class="filter hide">
+            <a href="/listings/filter/Mountain" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-mountain-city"></i></div>
+                <p>mountain</p>
+            </a>
+        </div>
+        <div class="filter hide ">
+            <a href="/listings/filter/Lake" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-water"></i></div>
+                <p>Lake</p>
+            </a>
+        </div>
+        <div class="filter  hide " >
+            <a href="/listings/filter/Camping" class="text-dark">
+                <div class="text-center"><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </a>
+
+        </div>
+        <div class="filter hide">
+            <div class="text-center"><i class="fa-solid fa-igloo"></i></div>
+            <p>Domes</p>
+        </div>
+
+    </div>
+    <div class="tax-toggle " >
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label font-8" for="flexSwitchCheckDefault">&nbsp; &nbsp; Display total before taxes </label>
+          </div>
+    </div>
+    </div>
+
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 padding-all ">
+        
+        <% for(let dt of data){ %>
+            <a href="/listings/<%= dt._id%>">
+                <div class="card col card-listing" styel="width:18rem">
+                    <img src="<%= dt.image.url%>" 
+                       class="card-img-top" 
+                       alt="listing-iamge" 
+                       style="height:18rem"
+                    >
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                      <p class="card-text">
+                         <b><%= dt.title%></b>
+                         <br>
+                         &#8377; <%= dt.price.toLocaleString("en-IN") %>/night
+                         &nbsp;&nbsp; <i class="tax-info">+18% GST </i>
+                      </p>
+                    </div>
+                </div>
+            </a>
+            
+        <%}%>
+    </div>
+</body>
+
+<script>
+    let tax_toggle = document.getElementById("flexSwitchCheckDefault");
+    tax_toggle.addEventListener("click",()=>{
+        
+        let tax_info= document.querySelectorAll(".tax-info");
+        
+        for( info of tax_info){
+            
+            if(info.style.display!="inline"){
+                info.style.display="inline" 
+            }
+            else{
+                info.style.display="none"
+            }
+
+        }
+    });
+</script>
+
+
+
+
