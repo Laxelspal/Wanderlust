@@ -18,19 +18,17 @@
         </div>
 
         <div class="mt-3">
-            Original Listing Image <br>
-            <img src="<%= originalImageUrl%>" alt="">
+            Original Listing Images <br>
+            <% for(url of originalUrl){%>
+                <img src="<%= url%>" alt="">
+            <%}%>
         </div>
 
         <div class="mt-3">
             <label for="image"  class="form-label"> Upload new Image</label>
-            <input type="file" name="listing[image]"   class="form-control" >
+            <input type="file" name="listing[Images]" class="form-control" required multiple>
         </div>
-        <!-- <div class="mb-3">
-            <label for="image" class="form-label">Upload Listing Image </label>
-            <input type="file" name="listing[image]" value="<%= listing.image.url %>" class="form-control" required>
-            <div class="invalid-feedback">Image is Required !</div>
-        </div> -->
+      
 
         <div class="row">
             <div class="mt-3 col-md-4"> Category : <%= listing.category %></div>

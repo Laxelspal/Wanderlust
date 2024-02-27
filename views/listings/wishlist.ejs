@@ -1,0 +1,27 @@
+<% layout('layout/boiler') -%>
+<div class="p-md-3">
+    <h3 class=" m-3 p-3 offset-3 "><b class="ms-3">Welcome <%= username%></b></h3>
+    <div class="listing_conatiner row row-cols-lg-3  row-cols-md-2 row-cols-sm-1 m-3 p-3 mt-0">
+        <% for (let dt of listings ){%>
+            <a id="listing_a" href="/listings/<%= dt._id%>" class="p-3">
+                <div class="card col card-listing" styel="width:18rem">
+                    <img src="<%= dt.Images[0]%>" 
+                       class="card-img-top" 
+                       alt="listing-iamge" 
+                       style="height:18rem"
+                    >
+                    <div class="wish_cross">
+                        <i class="fa-solid fa-xmark" id="<%= dt._id%>"></i>
+                    </div>
+                    <div class="card-img-overlay"> </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                           <b><%= dt.title%></b>&nbsp;&nbsp;&nbsp;                      
+                       </p>
+                        
+                    </div>
+                </div>
+            </a>
+        <% } %>
+    </div>
+</div>

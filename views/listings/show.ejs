@@ -3,16 +3,46 @@
     let mapToken = "<%= process.env.MAP_TOKEN %>";
     let listing = <%- JSON.stringify(data)%>;
 </script>
-<div class="row mt-3 row-btn">
-    <div class="col-8 offset-3 ">
-        <h3> <%= data.title%> </h3>
+<div class="row mt-3 row-btn  ">
+    <div class="col-8 offset-lg-2">
+        <h3 class="show_title"> <%= data.title%> </h3>
     </div>
-    <div class="card card-listing col-8 offset-3  ">
-        <img src="<%= data.image.url%>" alt="listings-image " class="card-img-top show-img">
+    <div class="card card-listing col-8 offset-lg-2 mb-3 box_container ">
+
+        
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="<%= data.Images[0]%>" class="d-block card-img-top show-img" alt="...">
+              </div>
+              <% data.Images.remove(data.Images[0]) %>
+              <% for(url of data.Images){ %>
+                <div class="carousel-item">
+                    <img src="<%= url%>" class="d-block  card-img-top show-img" alt="...">
+                </div>
+              <% } %>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+
+
+
+
+    
          <div class="card-body">
-            <p class="card-text">
-                Owned By : <i><%= data.owner.username%></i><br>
-            </p>
+            <h6 class="card-text mt-3 bold-text">
+                Hosted By : <i><%= data.owner.username%></i><br>
+            </h6>
+            <hr>
             <p class="card-text"> <%= data.description%> </p>
             <p class="card-text bold-text " >    
                 &#8377; <%= data.price.toLocaleString("en-IN")%> 
@@ -25,7 +55,7 @@
     </div>
 
     <% if(currUser && data.owner._id.equals(currUser._id)) {%>
-        <div class="col-8  mb-3 offset-3 ">
+        <div class="col-8  mb-3 offset-lg-2 ">
             <a href="/listings/<%= data._id%>/edit" class="btn btn-dark edit-btn"> Edit </a>
             <form method="POST" action="/listings/<%= data._id%>?_method=DELETE" class="d-inline ml-2">
                 <button type="submit" class="btn btn-dark  ">DELETE</button>
@@ -33,16 +63,14 @@
         </div>
     <% } %>
  
-   <div class="col-8 offset-3 mt-3 ">
+   <div class="col-8 offset-lg-2 mt-3  ">
       <% if(currUser ) {%>
        <hr>
        <h5 class="bold-text">Leave a Review </h5>
        <form action="/listings/<%= data._id%>/reviews" method="POST" novalidate class="needs-validation">
             <div>
                 <label for="rating" class="from-label ">Rating</label>
-                <!-- <input type="range" class="form-range"  min="1" max="5" name="review[rating]" id="rating"> -->
                 <fieldset class="starability-slot">
-                    <!-- <legend>First rating:</legend> -->
                     <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
                     <input type="radio" id="first-rate1" name="review[rating]" value="1" />
                     <label for="first-rate1" title="Terrible">1 star</label>
@@ -72,16 +100,19 @@
        <% if(data.reviews.length>0){%>
        <div class="row ">
        <h5><b> All Review</b></h5>
+       
        <div class="row">
           <% for(review of data.reviews){ %>
-            <div class="card mb-3 ms-3 col-5 ">
+            <div class="card mb-3  col-5 p-3 pb-1 review_card ">
                 <div class="card_body">
                     <h5 class="card-title">@<%= review.author.username%></h5>
-                    <p class="starability-result card-text rating-star" data-rating="<%= review.rating%>"></p>
+                    <% for(let k=1;k<=review.rating;k++){ %>
+                        <i class="fa-solid fa-star"></i>
+                    <%}%>   
                     <p class="card-text"><%= review.comment%></p>
                 </div>
                 <form action="/listings/<%= data.id%>/reviews/<%= review._id%>?_method=DELETE" method="POST" class="mb-3">
-                     <button class="btn btn-sm btn-dark">Delete</button>
+                     <button class="btn btn-sm btn-dark mt-3">Delete</button>
                 </form>
            </div>
           <%}%>
@@ -89,9 +120,9 @@
        </div>
        <%}%>
 
-       <div class="row mt-3 mb-3">
+       <div class="row mt-3 mb-3 ">
         <h4 class="bold-text">Where you will'be</h4>
-            <div class="row ">
+            <div class="row " style="height: 400px;">
                 <div id="map"> </div>
             </div>
        </div>
@@ -99,7 +130,10 @@
    </div>
 </div>
 
+
 <script src="/js/map.js"></script>
+
+
 
 
 

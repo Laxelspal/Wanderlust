@@ -1,12 +1,23 @@
 <% layout('layout/boiler') -%>
 <div class="row">
-    <div class="col-8 offset-3" >
+    <div class="col-8 offset-lg-2" >
     <br>
-    <h2>Create a new Listing</h2>
+
+    <div class="new_top_box row">
+        <div class="mt-3 pt-3 pr-3 col top_text_box">
+            <h1 class="bold-text">Make your place stand out</h1>
+            <p class="bold-text">In this step, you’ll add some of the amenities your place offers, plus 2 or more photos. Then you’ll create a title and description.</p>
+        </div>
+        <div class="new_img_box col">
+            <img src="/home_design.jpg" alt="" srcset="">
+        </div>
+    </div>
+    
 
     <form method="POST" action="/listings" novalidate class=" needs-validation" enctype="multipart/form-data">
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <h5 class="bold-text mt-3 ">Give your house a title</h5>
+            <!-- <label for="title" class="form-label">Title</label> -->
             <input type="text" name="listing[title]" 
                placeholder="enter the title" 
                class="form-control"
@@ -14,20 +25,29 @@
             <div class="valid-feedback">Looking Good !</div>
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
+            <h5 class="bold-text mt-3 ">Describe your house</h5>
+            <label for="description" class="form-label">Share what makes your place special.We'll use these to get your description started.</label>
             <textarea name="listing[description]"  cols="20" rows="5" class="form-control" required></textarea>
             <div class="invalid-feedback">Description is Required !</div>
         </div>
 
         
-        <div class="mb-3">
-            <label for="image" class="form-label">Upload Listing Image </label>
-            <input type="file" name="listing[image]" class="form-control" required>
+        <div class="mb-3 mt-3">
+            <h5 class="bold-text mt-3 ">Add some photos of your house</h5>
+            <label for="image" class="form-label">You'll need 2 photos to get started. You can add more or make changes later. </label>
+            <div class="new_box mt-3">
+                <div class="new_icon"><i class="fa-regular fa-image"></i></div>
+                <div class="box_input">
+                    <input type="file" name="listing[Images]" class="form-control "  required multiple>
+                </div>
+            </div>
+            
         </div>
+        <br>
+        <h5 class="bold-text mt-3">Which of these best describes your place?</h5>
         <select class="form-select mb-3" aria-label="Default select example" name="listing[category]" required>
-            <option selected>Select the category</option>
-            <option value="Trending">Trending</option>
-            <option value="Rooms" >Rooms</option>
+            <i class="fa fa-bed" aria-hidden="true"></i> <option value="Rooms" selected>Rooms </option>
+            <option value="Trending">Trending </option>
             <option value="Farms">Farms</option>
             <option value="Arctic">Arctic</option>
             <option value="Beach">Beach</option>
@@ -38,28 +58,43 @@
             <option value="Camping" >Camping</option>
             <option value="Domes">Domes</option>
             <option value="Boats">Boats</option>
+
+            <option value="Chef's">Chef's and kitchens</option>
+            <option value="Camping" >Ski-in/out</option>
+            <option value="Domes">Domes</option>
+            <option value="Boats">Boats</option>
             
         </select>
         <div class="row">
             <div class="mb-3 col-md-4">
-                <label for="price" class="form-label">Price</label>
+                <h5 class="bold-text mt-3 ">Now, set your price</h5>
+                <label for="price" class="form-label">You can change it anytime.</label>
                 <input type="number" name="listing[price]" placeholder="1200" class="form-control" required>
                 <div class="invalid-feedback">Price should be valid !</div>
     
             </div>
 
             <div class="mb-3 col-md-4">
-                <label for="country" class="form-label">Country</label>
+                <h5 class="bold-text mt-3 ">Your country name </h5>
+                <label for="country" class="form-label">Give your full country name</label>
                 <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
                 <div class="invalid-feedback">Country is Required !</div>
             </div>
     
         </div>
-
+        
+        <br>
         <div class="mb-3 ">
-            <label for="location" class="form-label">Location</label>
-            <input type="text" name="listing[location]" placeholder="Kanpur,Uttar Padesh" class="form-control" required>
-            <div class="invalid-feedback">Location should be valid !</div>
+            <h5 class="bold-text mt-3 ">Where's your place located?</h5>
+            <div class="new_box">
+                <div class=" new_icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="box_input">
+                    <input type="text" name="listing[location]" placeholder="Enter your Address" class="form-control" required>
+                    <div class="invalid-feedback">Location should be valid !</div>
+                </div>
+    
+            </div>
+            
         </div>
 
         <button type="submit" class="btn btn-dark add-btn">Create</button>

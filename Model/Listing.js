@@ -11,15 +11,16 @@ const listingSchema = new Schema({
     description:{
         type:String
     },
-    image:{
-        url:String,
-        filename:String,
-    },
+    Images:[String],
     price:{
         type:Number,
         defult:0
     },
-    location:String,
+    location:{
+        type:String,
+        text:true,
+
+    },
     country:String,
     category: {
         type:String,
@@ -56,4 +57,5 @@ listingSchema.post("findOneAndDelete",async(listing)=>{
 });
 
 const Listing = mongoose.model("Listing",listingSchema);
+
 module.exports = Listing;

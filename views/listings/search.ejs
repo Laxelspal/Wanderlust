@@ -1,0 +1,45 @@
+<% layout('layout/boiler') -%>
+<script>
+    let mapToken = "<%= process.env.MAP_TOKEN %>";
+    let listing = <%- JSON.stringify(data)%>;
+    let center_geometry = <%-JSON.stringify(term_geometry)%>
+</script>
+
+<div class="search_main ">
+    <div class="search_listings p-3 m-3 ">
+        <h2 >Stay in <%= term %></h2>
+        <div class="row row-cols-lg-3 row-cols-md-2">
+        <% for(let dt of data){ %>
+            <a href="/listings/<%= dt._id%>" style="min-width: 18rem;">
+                <div class="card col card-listing" >
+                    <img src="<%= dt.Images[0]%>" 
+                       class="card-img-top" 
+                       alt="listing-iamge" 
+                       style="height:18rem"
+                    >
+                    <div class="card-img-overlay"></div>
+                    <div class="listing_like">
+                        <% let check = currUser && currUser.wishlist.includes(dt._id) ? "red" : "" %>
+                        <i class="fa-solid fa-heart heart_icon <%= check%> " id ="<%= dt._id%>"  ></i>
+                    </div>
+                    <div class="card-body">
+                      <p class="card-text">
+                         <b><%= dt.title%></b>
+                         <br>
+                         &#8377; <%= dt.price.toLocaleString("en-IN") %>/night
+                         &nbsp;&nbsp; <i class="tax-info">+18% GST </i>
+                      </p>
+                    </div>
+                </div>
+            </a>
+            
+        <%}%>
+        </div>
+    </div>
+    <div class="search_map ">
+        <div class="row " style="height: 100%;">
+            <div id="map" > </div>
+        </div>
+    </div>
+</div>
+<script src="/js/search.js"></script>

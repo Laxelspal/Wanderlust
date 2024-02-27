@@ -1,40 +1,30 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa-sharp fa-regular fa-compass ms-3"></i></a>
-      <button class="navbar-toggler"
-        type="button" 
-        data-bs-toggle="collapse" 
-        data-bs-target="#navbarNavAltMarkup"
-       >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar  bg-body-light border-bottom sticky-top pt-3 pb-3 ">
+  <div class="container nav_container">
+    <a class="navbar-brand " href="/listings"><i class="fa-sharp fa-regular fa-compass ms-3"></i></a>
+    <a class="nav-link me-auto hide " href="/listings"><h5 class="bold-text">Explore</h5></a>
+    <!-- search -->
+    <div class="search ">
+      <form class="d-flex search_box" method="get" action="/listings/search">
+        <input class="form-control me-2 search-input" type="search" placeholder="Anywhere"  name="searchWord">
+        <button class="btn btn-search" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i><p style="margin: 0px;" class="hide">Search</p>
+        </button>
+      </form>
+    </div>
 
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="/listings">Explore</a>
-        </div>
-        <div class="search ms-auto">
-          <div class="container-fluid ">
-            <form class="d-flex" method="get" action="/listings/search">
-              <input class="form-control me-2 search-input" type="search" placeholder="Search destinations"  name="searchWord">
-              <button class="btn btn-search" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>Search
-              </button>
-            </form>
-          </div>
-        </div>
-
-
-        <div class="navbar-nav ms-auto right">
-          <a class="nav-link" href="/listings/new">Your Airbnb home</a>
-          <% if(!currUser) { %>
-          <a class="nav-link "  href="/signup"><b>Sign up</b> </a>
-          <a class="nav-link" href="/login"><b>Log in</b></a>
-          <% } %>
-          <% if(currUser) { %>
-          <a class="nav-link" href="/logout">Log out</a>
-          <% } %>
-        </div>
+    <!-- nav right -->
+    <div class="navbar-nav  right ms-auto nav_right">
+      <a class="nav-link nav_hover hide " href="/listings/new" style="margin-right: 1rem;">Switch to hosting</a>
+      <div class="user_logo">
+         <div class="user_menu">
+          <i class="fa-solid fa-bars"></i>
+         </div>
+         <div class="user_icon hide">
+            <i class="fa-solid fa-user"></i>
+         </div>
       </div>
     </div>
-  </nav>
+
+  </div>
+
+</nav>

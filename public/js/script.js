@@ -1,3 +1,5 @@
+
+
 (() => {
     'use strict'
   
@@ -18,22 +20,93 @@
   })();
 
 
-let  nav_btn = document.querySelector(".navbar-toggler");
-console.log(nav_btn);
+let hearts = document.querySelectorAll(".heart_icon");
+let wishlist = document.querySelector(".wishlist");
+// let parent = document.querySelector(".listing_con");
 
-nav_btn.addEventListener('click',()=>{
+for( let heart of hearts  ){
+    heart.addEventListener("click",(e)=>{
+      e.preventDefault();
+      // parent.style.opacity=0.2;
+      let id = heart.getAttribute("id");
+      let wish_route = document.querySelector(".wish_route");
+      
+      if(heart.classList.contains("red")){
+         wish_route.setAttribute("href",`/listings/ReWishlist/${id}`);
+         wishlist.children[0].children[0].innerText = "Remove from wishlist";
+         console.log(wishlist.children[0].children[0].innerText);
+      }
+      else{
+        wish_route.setAttribute("href",`/listings/wishlist/${id}`);
+      }
+      wishlist.classList.remove("popbox");
+      console.log("heart was clicked");
+    })
+}
+let cross = document.querySelector(".cross");
 
-  let right = document.querySelector(".right");
-  let navbox= document.querySelector(".navbar");
-  console.log(right);
+cross.addEventListener("click",()=>{
+    // parent.style.opacity=1;
+    wishlist.classList.add("popbox");
+});
 
-  if(navbox.style.height!= "17rem"){
-    navbox.style.height= "17rem";
-    right.classList.remove("ms-auto");
-  } 
-  else{
-    navbox.style.height= "5rem";
-    right.classList.add("ms-auto");
-  }  
 
-})
+let user_logo = document.querySelector(".user_logo");
+let user_box = document.querySelector(".user_box");
+let user_cross = document.querySelector(".user_cross");
+
+user_logo.addEventListener("click",()=>{
+  console.log("user box clicked");
+   user_box.classList.toggle("popbox");
+});
+
+user_cross.addEventListener("click",()=>{
+  console.log("user cross clicked");
+   user_box.classList.toggle("popbox");
+});
+
+let delete_list = document.querySelectorAll(".wish_cross");
+console.log("wish cross",delete_list);
+
+for(let delbtn of delete_list){
+    delbtn.addEventListener("click",(e)=>{
+      e.preventDefault();
+      let id = delbtn.children[0].getAttribute("id");
+      console.log(id,delbtn);
+      let wish_route = document.querySelector(".wish_route");
+      wish_route.setAttribute("href",`/listings/ReWishlist/${id}`);
+      wishlist.children[0].children[0].innerText = "Remove from wishlist";
+      wishlist.classList.remove("popbox");
+      console.log("listing is deleted from wishlist");
+    })
+}
+
+
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: 1,
+  // spaceBetween: 1,
+  pagination: {
+  el: ".swiper-pagination",
+  clickable: true,
+},
+breakpoints: {
+ "@0.00": {
+     slidesPerView: 1,
+     spaceBetween: 10,
+  },
+ "@0.75": {
+     slidesPerView: 1,
+     spaceBetween: 20,
+  },
+ "@1.00": {
+     slidesPerView: 2,
+     spaceBetween: 30,
+  },
+ "@1.50": {
+      slidesPerView: 3,
+      spaceBetween: 50,
+  },
+},
+});
+
+
