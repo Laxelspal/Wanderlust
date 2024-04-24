@@ -24,11 +24,11 @@ app.use(express.static(path.join(__dirname,"public")));
 app.engine("ejs",ejsmate);
 app.use(methodOveride("_method"));
 
-
+let DBUrl = process.env.MongoDBUrl;
 const url = "mongodb://127.0.0.1:27017/Wanderlust";
 
 const store = MongoStore.create({
-    mongoUrl:url,
+    mongoUrl:DBUrl,
     crypto:{
         secret:process.env.SECRET
     },
