@@ -1,5 +1,5 @@
 const mongoose= require("mongoose");
-const Listing = require("../Model/Listing.js");
+const Listing = require("../Model/listingModel.js");
 const initDB= require("./data.js");
 
 main().then(()=>{
@@ -10,12 +10,12 @@ main().then(()=>{
 })
 
 async function main() {
-await mongoose.connect('mongodb://127.0.0.1:27017/wanderlust');
+await mongoose.connect('mongodb://127.0.0.1:27017/Wanderlust');
 }
 
 const initilData = async()=>{
     await  Listing.deleteMany({});
-    initDB.data = initDB.data.map((listing)=>({...listing,owner:"652e639484d75c10627f769b"}));
+    initDB.data = initDB.data.map((listing)=>({...listing,owner:"662365efc1f6a779718e44ce"}));
     await Listing.insertMany(initDB.data);
     console.log("Data is initialized");
 }

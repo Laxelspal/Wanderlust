@@ -1,6 +1,5 @@
 const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const fs = require("fs");
+const sharp = require("sharp");
 
 cloudinary.config({
     cloud_name:process.env.CLOUD_NAME,
@@ -8,46 +7,57 @@ cloudinary.config({
     api_secret:process.env.CLOUD_API_SECRET
 });
 
-// const storage = new CloudinaryStorage({
-//     cloudinary: cloudinary,
-//     params: {
-//       folder: 'wanderlust_DEV',
-//       allowerdFormat: ["png","jpg","jpeg"], // supports promises as well
-//     },
-// });
+module.exports.uploadsUser= async (file) => {
+    const resizedImageBuffer = await sharp(file.buffer)
+      .resize(2100,2000)
+      .toFormat('jpeg')
+      .jpeg({ quality: 90 })
+      .toBuffer();
 
-module.exports.uploads = async (file)=>{
+
+    // Upload resized image to Cloudinary
     return new Promise(resolve=>{
-      cloudinary.uploader.upload(file,(err,result)=>{
-        if(err) return {message :"Fail"}
+      cloudinary.uploader.upload_stream(
+        { folder: 'wanderlust_v1' }, // Optionally specify a folder in Cloudinary and format
+        (err, result) => {
+          if (err) {
+            console.log(err);
+            return {message :"Fail"}
+          } 
+          resolve({
+            url:result.secure_url,
+            id:result.public_id
+          })
+        }
+      ).end(resizedImageBuffer);
+    })
+};
+
+module.exports.uploadsListing= async (file) => {
+  const resizedImageBuffer = await sharp(file.buffer)
+    .resize(2000,1000)
+    .toFormat('jpeg')
+    .jpeg({ quality: 90 })
+    .toBuffer();
+
+
+  // Upload resized image to Cloudinary
+  return new Promise(resolve=>{
+    cloudinary.uploader.upload_stream(
+      { folder: 'wanderlust_v1' }, // Optionally specify a folder in Cloudinary and format
+      (err, result) => {
+        if (err) {
+          console.log(err);
+          return {message :"Fail"}
+        } 
         resolve({
           url:result.secure_url,
           id:result.public_id
         })
-      })
-    })
-}
-
-// async function uploadToCloudinary(file) { 
-   
-//   const folder = "Image" +"/";
-//   console.log(folder);
-//   return cloudinary.uploader 
-//       .upload(file, { public_id : "Image" }) 
-//       .then((result) => { 
-//           console.log(result);
-//           fs.unlinkSync(file);
-//           return { 
-//               message:"success", 
-//               url: result.url,
-     
-//           }; 
-//       }) 
-//       .catch((error) => { 
-//           fs.unlinkSync(file);
-//           return { message: "Fail" }; 
-//       }); 
-// }
+      }
+    ).end(resizedImageBuffer);
+  })
+};
 
 
 

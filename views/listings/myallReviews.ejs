@@ -1,0 +1,31 @@
+<% layout('layout/boiler') -%>
+
+<div class="">
+<% if(Reviews.length>0){%>
+    <div class="">
+      <h3 class="font-w-600 text-center m-3"> All Review</h3>
+
+      <div class="d-flex justify-content-cneter flex-wrap">
+        <% for(review of Reviews){ %>
+        <div class="card m-3  p-3 pb-1 review_card text-center" style="width:18rem">
+          <div class="card_body" >
+    
+            <p class="font-w-600 font-s-1"><%= review.listing.title%></p>
+            <p class="card-text"><%= review.comment%></p>
+            <% for(let k=1;k<=review.rating;k++){ %>
+              <i class="fa-solid fa-star font-s-1 "></i>
+            <%}%>
+          </div>
+          <form
+            action="/listings/<%=review.listing._id%>/reviews/<%= review._id%>?_method=DELETE"
+            method="POST"
+            class="mb-3"
+          >
+            <button class="btn btn-sm btn-dark mt-3">Delete</button>
+          </form>
+        </div>
+        <%}%>
+      </div>
+    </div>
+    <%}%>
+</div>    

@@ -1,20 +1,20 @@
 <nav class="navbar  bg-body-light border-bottom sticky-top pt-3 pb-3 ">
   <div class="container nav_container">
     <a class="navbar-brand " href="/listings"><i class="fa-sharp fa-regular fa-compass ms-3"></i></a>
-    <a class="nav-link me-auto hide " href="/listings"><h5 class="bold-text">Explore</h5></a>
+    <a class="nav-link me-auto nav_hide " href="/listings"><h5 class="bold-text">Explore</h5></a>
     <!-- search -->
     <div class="search ">
       <form class="d-flex search_box" method="get" action="/listings/search">
-        <input class="form-control me-2 search-input" type="search" placeholder="Anywhere"  name="searchWord">
+        <input class="form-control me-2 search-input" type="search" placeholder="Anywhere"  name="place">
         <button class="btn btn-search" type="submit">
-          <i class="fa-solid fa-magnifying-glass"></i><p style="margin: 0px;" class="hide">Search</p>
+          <i class="fa-solid fa-magnifying-glass"></i><p style="margin: 0px;" class="nav_hide">Search</p>
         </button>
       </form>
     </div>
 
     <!-- nav right -->
     <div class="navbar-nav  right ms-auto nav_right">
-      <a class="nav-link nav_hover hide " href="/listings/new" style="margin-right: 1rem;">Switch to hosting</a>
+      <a class="nav-link nav_hover nav_hide " href="/listings/new" style="margin-right: 1rem;">Switch to hosting</a>
       <div class="user_logo">
          <div class="user_menu">
           <i class="fa-solid fa-bars"></i>

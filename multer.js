@@ -1,27 +1,25 @@
 const multer =require("multer");
+const AppError =require("./utils/AppError");
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) { 
-        cb(null, "./uploads/"); 
-    }, 
-    filename: function (req, file, cb) { 
-        cb(null, file.originalname); 
-    }, 
-});
+const multerStorage = multer.memoryStorage();
 
-const fileFilter = (req,file,cb)=>{
-    if(file.mimetype ==='image/jpeg' || file.mimetype === 'image/png' || file.mimetype ==='image/jpg'){
-        cb(null,true);
-    }
-    else{
-        cb({message:"Unsupported File format"}, false)
-    }
-}
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(new AppError('Not an image! Please upload only images.', 400), false);
+  }
+};
 
 const upload = multer({
-    storage:storage,
-    limits : { fileSize : 1024 * 1024 },
-    fileFilter:fileFilter,
+  storage: multerStorage,
+  fileFilter: multerFilter
 });
 
-module.exports= upload;
+module.exports.uploadListingImages =  upload.fields([
+  { name: 'coverImage', maxCount: 1 },
+  { name: 'images', maxCount: 3 }
+])
+
+module.exports.uploadUserPhoto = upload.single('photo');
+

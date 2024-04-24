@@ -8,6 +8,7 @@ body{
     height:6rem;
     background-color:#fff ;
     transition: 0.2s linear;
+    box-shadow: 5px 0px 5px #b4aaaa;
 }
 .container{
     max-width: 100% !important;
@@ -31,6 +32,11 @@ body{
 .nav-link{
     min-width: fit-content;
 }
+#middle-container{
+    min-height: 80vh; 
+    background-color: #f7f7f7; 
+    width: 98%;
+}
 .flash-btn{
     padding: 5px !important;
 }
@@ -44,6 +50,10 @@ body{
 }
 .search{
     flex-grow: 0.5;
+}
+.search:hover{
+    box-shadow: 2px 2px 2px #b4aaaa;
+    border-radius: 25px;
 }
 .btn-search{
     background-color:#fe424d;
@@ -81,8 +91,6 @@ body{
     cursor: pointer;
     box-shadow: 1px 1px 2px #9c9b9b;
 }
-
-
 .user_icon{
     padding: 0.3rem;
     border-radius: 50%;
@@ -115,9 +123,6 @@ body{
     right: 5px;
     cursor: pointer;
 }
-.remove_hide{
-    display: none;
-}
 
 .nav-link{
     color: #222222 !important;
@@ -141,7 +146,7 @@ body{
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
 }
 
 .nav_swiper{
@@ -248,6 +253,20 @@ footer{
     
 }
 
+/* Sign page style */
+.signup_card{
+    max-width: 40rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 4px 4px 5px #d3d1d1;
+}
+
+/* Login page */
+.forgot_btn{
+    font-weight: 500;
+    cursor: pointer;
+}
+
 /* card style */
 .card-listing{
     border: none !important;
@@ -281,14 +300,20 @@ footer{
 .red{
     color: #fe424d !important;
 }
+.font-w-600{
+    font-weight: 600;
+}
+.font-s-1{
+    font-size: 0.9rem;
+}
+.font-s-large{
+    font-size: large;
+}
 
-.card-body{
+/* .card-body{
     padding: 0 !important;
-}
-.review_card{
-    width:45%;
-    border: none;
-}
+} */
+
 .card-text{
     font-weight: 400 !important;
 }
@@ -296,6 +321,52 @@ footer{
 a{
     text-decoration: none;
 }
+
+/* show page */
+.owner_img{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    margin: 0rem 1rem;
+}
+.para_style{
+    text-align: justify;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    letter-spacing: 0.1px;
+}
+.cross_text{
+    text-decoration: line-through;
+}
+.reserve_div{
+    background-color: #fe424d;
+    color: #fff;
+    text-align: center;
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+
+}
+.review_card{
+    min-width:30%;
+    max-width:40%;
+    border: none;    
+    box-shadow: 1px 1px 2px #a8a6a6;
+    font-size: 0.7rem;
+}
+.reserve_card{
+    box-shadow: 2px 2px 5px #a8a6a6;
+    border-radius: 2rem;
+}
+.btn_full{
+    width: 100%;
+    border-radius: 2rem;
+    padding: 0.5rem;
+    font-weight: 600;
+    font-size: large;
+}
+
 
 /* card Effect */
 .card-img-overlay{
@@ -352,6 +423,7 @@ a{
     display: none;
 }
 
+
 /* new page */
 .new_box{
     display: flex;
@@ -366,12 +438,12 @@ a{
     flex-wrap: wrap;
 }
 .new_img_box{
-    height: 22rem;
-    width:25rem;
+    height: 18rem;
+    width:18rem;
 }
 .new_img_box img{
-    height: 22rem;
-    width:21rem;
+    height: 18rem;
+    width:19rem;
     background-size: cover;
     border-radius: 2rem ;
 }
@@ -396,6 +468,15 @@ a{
 .nav_collaps_box{
     flex-wrap: nowrap !important;
 }
+.amenities_input{
+    text-decoration: none;
+    height: 1.2rem;
+    width: 1.3rem;
+}
+.amenities_item{
+    display: flex;
+    align-items: baseline;
+}
 
 /* edit-style */
 .edit-btn{
@@ -405,8 +486,16 @@ a{
 .edit_select{
     width:15rem;
 }
+.edit_img{
+    width:200px;
+    height:100px;
+}
 
 /* show Page */
+.summary-text{
+    padding:1rem 0rem;
+    text-align: justify;
+}
 .show_title{
     padding-top: 0.5rem;
     font-weight: 600;
@@ -458,17 +547,17 @@ a{
     width: 100%;
   }
 /* Search page */
-.search_main{
+/* .search_main{
     display: flex;
     position: relative;
-}
+} */
 .search_map{
     width:60vw;
     flex-grow: 0.5;
 }
-.search_listings{
+/* .search_listings{
     flex-grow: 1;
-}
+} */
 /* Map Style */
 
 #map { 
@@ -488,30 +577,139 @@ a{
     z-index: 10;
 }
 
-/* Media Query */
-@media(max-width:950px){
-    .search_map{
-        display: none;
-    }
+.font-w-500{
+    font-weight: 500;
 }
+.airbnb-color{
+    background-color: #3A416F ;
+    border-radius: 2rem 0rem 0rem 2rem;
+}
+.hide{
+    display: none;
+}
+
+.remove_hide{
+    display: none;
+}
+
+/* Profile page */
+.top-box{
+    display: flex;
+    justify-content: center;
+    width:95vw;
+}
+.profile-box{
+    width:900px;
+    border: 1px solid black;
+    border-radius: 2rem;
+}
+.profile-back-img{
+    width: 100%;
+    height:100px;
+    border-radius: 2rem 2rem 0rem 0rem;
+}
+
+/* Media Query */
+
 @media (max-width :880px) {
-    .hide{
+    .nav_hide{
         display: none;
     }
     .remove_hide{
         display: block;
     }
 }
-@media(max-width:600px){
-    
+@media(max-width:950px){
+    .search_map{
+        display: none;
+    }
 }
+
 @media(min-width:1250px){
     .top_text_box{
         padding-top: 5rem !important;
     }
 }
 
-@media(max-width:1000px){
+
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.account {
+    /* background-image: url('background.jpg'); /* Replace 'background.jpg' with your image path 
+    background-size: cover;
+    background-position: center;
+    color: #000; */
+    margin: 3rem 2rem 2rem 2rem;
+    box-shadow: 1px 1px 5px #ebebeb ;
+    border-radius: 2rem ;
+    width: 70%;
+}
+.sidebar-margin-top{
+    margin-top: 12rem;
+}
+.sidebar {
+    padding: 1.2rem;
+    border-top-right-radius: 1.2rem;
+    border-bottom-right-radius: 1.2rem;
+}
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+.sidebar li {
+    margin-bottom: 10px;
+}
+.sidebar li a {
+    color: #fff;
+    opacity: 0.8;
+}
+.sidebar li a:hover{
+    opacity: 1;
+}
+.content {
+    background-color:#fff;
+    /* padding: 1.2rem; */
+    border-radius: 0rem 2rem 2rem 0rem;
+}
+
+
+.user-info img {
+    border-radius: 50%;
+    width: 11rem;
+    height: 11rem;
+    margin-top: 2.8rem;
+}
+.user-old-en{
+    margin: 7rem 0rem 0rem 7.5rem;
+}
+.user-old-img-box{
+    border-radius: 0.2rem 1rem 1rem 0.2rem;
+    background-color: #3A416F;
+    color: #fff;
+    padding: 1rem;
+    height:200px;
+}
+
+@media(max-width:600px){
+    .account{
+        margin: 2rem 1rem;
+        width:88%;
+    }
+    .airbnb-color{
+        border-radius: 1rem 0rem 0.5rem 0.5rem;
+        padding: 0rem;
+    }
+    .row{
+        --bs-gutter-x: 0rem !important;
+    }
+
+   
+}
+
+@media(max-width:900px){
     .offset-3{
         margin: 0;
         padding: 0;
@@ -523,6 +721,32 @@ a{
     .col-6{
         width:100% !important;
     }
+    .user-old-en{
+        margin: 1rem 0rem 0rem 0.5rem;
+    }
+    .sidebar{
+        padding: 0 !important;
+    }
+    .account{
+        margin: 2rem 0rem;
+    }
+    .container-fluid{
+        padding: 0 rem !important;
+    }
+    .user-info img{
+        height: 6rem;
+        width:6rem;
+    }
+    .user-old-img-box{
+        height: auto;
+    }
+    .hide-user-setting{
+        display: none;
+    }
+    .px-4{
+        padding: 0 !important;
+    }
+    .search-map-hide{
+        display: none;
+    }
 }
-
-

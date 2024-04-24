@@ -1,0 +1,22 @@
+<% layout('layout/boiler') -%>
+
+<h3 class="font-w-600 ">My Bookings</h3>
+
+<div class="d-flex mb-3 flex-wrap">
+    <% for(booking of bookings){%>
+        <div class="card-booking">
+            <img
+                class="house-image"
+                src="<%=booking.listing.coverImage%>"
+                alt="House Image"
+            />
+            <p class="price-booking-card font-w-600"><%=booking.listing.title%> </p>
+            <p class="date-booking-card">&#8377;<%=booking.price.toLocaleString("en-IN")%> </p>
+            <a id="" href="/api/v1/bookings/<%=booking._id%>" ><div class="btn btn-danger">Delete</div></a>
+        </div>
+        </a>
+    <%}%>    
+    
+</div>
+</div>
+

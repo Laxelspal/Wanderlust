@@ -1,5 +1,5 @@
 <% layout('layout/boiler') -%>
-<div class="row">
+<div class="row m-3">
     <div class="col-8 offset-lg-2" >
     <br>
 
@@ -14,15 +14,20 @@
     </div>
     
 
-    <form method="POST" action="/listings" novalidate class=" needs-validation" enctype="multipart/form-data">
+    <form method="POST" action="/listings"  class=" needs-validation"  novalidate enctype="multipart/form-data">
         <div class="mb-3">
-            <h5 class="bold-text mt-3 ">Give your house a title</h5>
-            <!-- <label for="title" class="form-label">Title</label> -->
+            <h5 class="font-w-600 mt-3 ">Give your house a title</h5>
             <input type="text" name="listing[title]" 
                placeholder="enter the title" 
                class="form-control"
                required>
             <div class="valid-feedback">Looking Good !</div>
+        </div>
+        <div class="mb-3">
+            <h5 class="bold-text mt-3 ">Give a quick summary of your home </h5>
+            <label for="summary" class="form-label"></label>
+            <textarea name="listing[summary]"  cols="20" rows="2" class="form-control" required></textarea>
+            <div class="invalid-feedback">Summary is Required !</div>
         </div>
         <div class="mb-3">
             <h5 class="bold-text mt-3 ">Describe your house</h5>
@@ -33,12 +38,23 @@
 
         
         <div class="mb-3 mt-3">
-            <h5 class="bold-text mt-3 ">Add some photos of your house</h5>
-            <label for="image" class="form-label">You'll need 2 photos to get started. You can add more or make changes later. </label>
+            <h5 class="bold-text mt-3 ">Add a coverImage of your house</h5>
+            <label for="coverImage" class="form-label"></label>
+            <div class="new_box ">
+                <div class="new_icon"><i class="fa-regular fa-image"></i></div>
+                <div class="box_input">
+                    <input type="file" name="coverImage" class="form-control "  >
+                </div>
+            </div>
+            
+        </div>
+        <div class=" mt-3">
+            <h5 class="bold-text  ">Add some more photos of your house</h5>
+            <label for="images" class="form-label"></label>
             <div class="new_box mt-3">
                 <div class="new_icon"><i class="fa-regular fa-image"></i></div>
                 <div class="box_input">
-                    <input type="file" name="listing[Images]" class="form-control "  required multiple>
+                    <input type="file" name="images" class="form-control "  multiple >
                 </div>
             </div>
             
@@ -46,7 +62,7 @@
         <br>
         <h5 class="bold-text mt-3">Which of these best describes your place?</h5>
         <select class="form-select mb-3" aria-label="Default select example" name="listing[category]" required>
-            <i class="fa fa-bed" aria-hidden="true"></i> <option value="Rooms" selected>Rooms </option>
+            <option value="Rooms" selected>Rooms </option>
             <option value="Trending">Trending </option>
             <option value="Farms">Farms</option>
             <option value="Arctic">Arctic</option>
@@ -56,48 +72,157 @@
             <option value="Mountain">Mountain</option>
             <option value="Lake">Lake</option>
             <option value="Camping" >Camping</option>
-            <option value="Domes">Domes</option>
             <option value="Boats">Boats</option>
+            <option value="New">New</option>
 
             <option value="Chef's">Chef's and kitchens</option>
-            <option value="Camping" >Ski-in/out</option>
+            <option value="Ski-in" >Ski-in/out</option>
             <option value="Domes">Domes</option>
-            <option value="Boats">Boats</option>
+            <option value="Tower">Tower</option>
             
         </select>
+
+        <div class="mb-3 mt-3 ">
+            <h5 class="bold-text mt-3">Amenities</h5>
+            <br>
+            <div class="row">
+                <div class="col-md-6 col-sm-4">
+                    <input type="checkbox" name="amenities[wifi]" id="wifi" class="amenities_input">
+                    <label for="wifi">
+                        <i class="fa-solid fa-wifi m-3"></i>
+                        Wifi
+                    </label>
+                </div>
+                
+                <div class="col-md-6 col-sm-4">
+                    <input type="checkbox" name="amenities[washing_machine]" id="washing_machine" class="amenities_input">
+                    <label for="washing_machine ">
+                        <i class="fa-solid fa-cash-register m-3"></i>
+                        Washing Machine
+                    </label>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[tv]" id="tv" class="amenities_input">
+                    <label for="tv">
+                        <i class="fa-solid fa-tv m-3"></i>
+                        TV
+                    </label>
+                </div>
+                
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[kitchen]" id="kitchen" class="amenities_input">
+                    <label for="kitchen ">
+                        <i class="fa-solid fa-kitchen-set m-3"></i>
+                        Kitchen
+                    </label>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[fridge]" id="fridge" class="amenities_input">
+                    <label for="fridge">
+                        <img src="/fridge.png" alt="" srcset=" " class="m-3">
+                        Fridge
+                    </label>
+                </div>
+                
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[air_conditioning]" id="air_conditioning" class="amenities_input">
+                    <label for="air_conditioning ">
+                        <i class="fa-brands fa-galactic-republic m-3"></i>
+                        Air conditioning
+                    </label>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[cooking_essentials]" id="cooking_essentials" class="amenities_input">
+                    <label for="cooking_essentials">
+                        <i class="fa-solid fa-utensils m-3"></i>
+                        Cooking Essentials
+                    </label>
+                </div>
+                
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[garden]" id="garden" class="amenities_input">
+                    <label for="garden ">
+                        <i class="fa-solid fa-tree-city m-3"></i>
+                        Garden
+                    </label>
+                    
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[iron]" id="iron" class="amenities_input">
+                    <label for="iron">
+                        <img src="/iron.png" alt="" class="m-3">
+                        Iron
+                    </label>
+                </div>
+                
+                <div class="col-md-6 col-sm-4 amenities_item">
+                    <input type="checkbox" name="amenities[smooking]" id="sooking" class="amenities_input">
+                    <label for="smooking ">
+                        <i class="fa-solid fa-smoking m-3"></i> Smooking allowed
+                    </label>
+                    
+                </div>
+                
+            </div>
+            
+        </div>
+
         <div class="row">
-            <div class="mb-3 col-md-4">
+            <div class="mb-3 col-md-6">
                 <h5 class="bold-text mt-3 ">Now, set your price</h5>
-                <label for="price" class="form-label">You can change it anytime.</label>
+                <label for="price" class="form-label"></label>
                 <input type="number" name="listing[price]" placeholder="1200" class="form-control" required>
                 <div class="invalid-feedback">Price should be valid !</div>
     
             </div>
 
-            <div class="mb-3 col-md-4">
-                <h5 class="bold-text mt-3 ">Your country name </h5>
-                <label for="country" class="form-label">Give your full country name</label>
-                <input type="text" name="listing[country]" placeholder="India" class="form-control" required>
-                <div class="invalid-feedback">Country is Required !</div>
+            <div class="mb-3 col-md-6 ">
+                <h5 class="bold-text mt-3 ">Where did you located?</h5>
+                <div class="new_box mt-3">
+                    <div class=" new_icon"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="box_input ">
+                        <input type="text" name="listing[location]" placeholder="Enter your Address" class="form-control" required>
+                        <div class="invalid-feedback">Location should be valid !</div>
+                    </div>
+        
+                </div>
             </div>
-    
         </div>
         
         <br>
-        <div class="mb-3 ">
-            <h5 class="bold-text mt-3 ">Where's your place located?</h5>
-            <div class="new_box">
-                <div class=" new_icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div class="box_input">
-                    <input type="text" name="listing[location]" placeholder="Enter your Address" class="form-control" required>
-                    <div class="invalid-feedback">Location should be valid !</div>
-                </div>
+
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <h5 class="bold-text mt-3 ">Number of bedrooms</h5>
+                <label for="bedrooms" class="form-label"></label>
+                <input type="number" name="listing[bedrooms]" placeholder="2" class="form-control" >
     
             </div>
-            
-        </div>
 
-        <button type="submit" class="btn btn-dark add-btn">Create</button>
+            <div class="mb-3 col-md-6 ">
+                <h5 class="bold-text mt-3 ">Number of maxguests</h5>
+                <label for="maxguests" class="form-label"></label>
+                <input type="number" name="listing[maxGuests]" placeholder="5" class="form-control" >
+            </div>
+        </div>
+        
+
+        <button type="submit" class="btn btn-dark add-btn mb-3 p-3">Add the house</button>
         <br>
         <br>
     </form>

@@ -1,0 +1,111 @@
+<div class="col-8 offset-lg-2 mt-3 pt-3 pb-3">
+    <% if(currUser ) {%>
+    <hr />
+    <h5 class="bold-text">Leave a Review</h5>
+    <form
+      action="/listings/<%= data._id%>/reviews"
+      method="POST"
+      novalidate
+      class="needs-validation"
+    >
+      <div>
+        <label for="rating" class="from-label mt-3 mb-3">Rating</label>
+        <fieldset class="starability-slot">
+          <input
+            type="radio"
+            id="no-rate"
+            class="input-no-rate"
+            name="rating"
+            value="1"
+            checked
+            aria-label="No rating."
+          />
+          <input
+            type="radio"
+            id="first-rate1"
+            name="rating"
+            value="1"
+          />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input
+            type="radio"
+            id="first-rate2"
+            name="rating"
+            value="2"
+          />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input
+            type="radio"
+            id="first-rate3"
+            name="rating"
+            value="3"
+          />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input
+            type="radio"
+            id="first-rate4"
+            name="rating"
+            value="4"
+          />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input
+            type="radio"
+            id="first-rate5"
+            name="rating"
+            value="5"
+          />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+      </div>
+      <div>
+        <label for="comment" class="form-label">Comment</label>
+        <textarea
+          name="comment"
+          id="comment"
+          cols="50"
+          rows="5"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please add comment in review</div>
+      </div>
+
+      <div class="mt-3 mb-3">
+        <button type="submit" class="btn btn-outline-dark">Add</button>
+      </div>
+    </form>
+    <hr />
+    <% }%> 
+    <% if(data.reviews.length>0){%>
+    <div class="row">
+      <h5><b> All Review</b></h5>
+
+      <div class="row">
+        <% for(review of data.reviews){ %>
+        <div class="card m-3  p-3 pb-1 review_card text-center">
+          <div class="card_body">
+            <div class="">
+              <img src="<%=review.user.photo%>" alt="" srcset="" class="owner_img">
+              <span class="font-w-600"><%= review.user.name%></span>
+            </div>
+            
+            <p class="card-text"><%= review.comment%></p>
+            <% for(let k=1;k<=review.rating;k++){ %>
+              <i class="fa-solid fa-star font-s-1 "></i>
+            <%}%>
+          </div>
+          <% if(currUser && review.user._id.equals(currUser._id))  {%>
+          <form
+            action="/listings/<%= data.id%>/reviews/<%= review._id%>?_method=DELETE"
+            method="POST"
+            class="mb-3"
+          >
+            <button class="btn btn-sm btn-dark mt-3">Delete</button>
+          </form>
+          <%}%>
+        </div>
+        <%}%>
+      </div>
+    </div>
+    <%}%>
+    </div>

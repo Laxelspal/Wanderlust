@@ -1,34 +1,52 @@
 <% layout('layout/boiler') -%>
 
-<div class="p-3 m-3 ">
-    <h5 class=" col-6 offset-lg-3 text-center bold-text ">Login</h5>
-    <hr class="col-6 offset-lg-3">
-    <h2 class=" col-6 offset-lg-3 bold-text ">Welcome to Wanderlust</h2>
-    <div class="row">
-        <div class=" col-6 offset-lg-3 " >
+<div class="row justify-content-center mt-3 mb-3 ">
+<div class="p-3 m-3 signup_card">
+    <h5 class=" mt-3  text-center bold-text">Login </h5>
+    <hr class=" text-center ">
+    <div class="row justify-content-center">
+        <div class="col-10 " >
 
-            <form action="/login"  method="POST" class="needs-validation" novalidate>
+            <form action="/listings/login"  method="POST" class="needs-validation" novalidate>
                 <div class="mb-3">
-                   <label for="username" class="form-label">Username</label>
-                   <input type="text"
-                   name="username"  
-                   class="form-control"
-                   id="username"
-                   required
-                   >
-                </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password"
-                    name="password"  
-                    class="form-control"
-                    id="password"
-                    required
+                    <label for="email" class="form-label font-w-600"> Email Address</label>
+                    <input type="email"
+                       name="email"  
+                       class="form-control"
+                       id="email"
+                      required
                     >
+                    <div class="invalid-feedback">Email can't be empty !</div>
                 </div>
-                <button class="btn btn-success">Login</button>
+                <div class="mb-3">
+                    <label for="password" class="form-label font-w-600"> Password</label>
+                    <input type="password"
+                      name="password"  
+                      class="form-control"
+                      id="password"
+                       required
+                    >
+                    <div class="invalid-feedback">Password can't be empty !</div>
+                </div>
+                
+                <button class="btn btn-danger mt-3 mb-3 loginbtn btn_full">Login</button>
+            </form>
+            <p class="forgot_btn " id="forgot_passowrd">Forgot  password ?</p>
+            <form action="/listings/forgotPassword"  method="POST" class="needs-validation hide" novalidate id="forgot_form">
+                <div class="mb-3">
+                    <label for="forgot_email" class="form-label font-w-600"> Email Address</label>
+                    <input type="email"
+                       name="email"  
+                       class="form-control"
+                       id="forgot_email"
+                      required
+                    >
+                    <div class="invalid-feedback">Email can't be empty !</div>
+                </div>
+                <button class="btn btn-danger mt-3 mb-3 loginbtn ">Send me token</button>
             </form>
 
         </div>
-    </div>  
+    </div> 
+</div>
 </div>

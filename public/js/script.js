@@ -22,7 +22,7 @@
 
 let hearts = document.querySelectorAll(".heart_icon");
 let wishlist = document.querySelector(".wishlist");
-// let parent = document.querySelector(".listing_con");
+let forgotbtn = document.querySelector("#forgot_passowrd");
 
 for( let heart of hearts  ){
     heart.addEventListener("click",(e)=>{
@@ -80,6 +80,20 @@ for(let delbtn of delete_list){
       console.log("listing is deleted from wishlist");
     })
 }
+
+if(forgotbtn){
+  forgotbtn.addEventListener("click",(e)=>{
+  let forgotForm = document.querySelector("#forgot_form");
+  if(forgotForm.classList.contains("hide")){
+    forgotForm.classList.remove("hide");
+
+  }
+  else{
+    forgotForm.classList.add("hide");
+  }
+})
+}
+
 
 
 var swiper = new Swiper(".mySwiper", {

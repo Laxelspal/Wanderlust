@@ -1,0 +1,75 @@
+<% layout('layout/boiler') -%>
+<div class="center">
+<div class="account">
+    <div class="row d-flex">
+        <div class="col-3 airbnb-color text-light">
+            <div class="sidebar sidebar-margin-top text-center">
+                <ul>
+                    <li class="mt-3"><a href="/listings/user/booking"> <i class="fa-solid fa-bag-shopping  "></i> <span class="hide-user-setting "> &nbsp;&nbsp;&nbsp;&nbsp;Bookings</span></a></li>
+                    <li class="mt-3"><a href="/listings/user/reviews"><i class="fa-regular fa-star "></i><span class="hide-user-setting ">&nbsp;&nbsp;&nbsp;&nbsp;Reviews</span></a></li>
+                    <li class="mt-3"><a href="/listings/user/wishlist"><i class="fa-solid fa-heart "></i><span class="hide-user-setting ">&nbsp;&nbsp;&nbsp;&nbsp;Favorites</span></a></li>
+                    <li class="mt-3"><a href="#"><i class="fa-solid fa-gear "></i><span class="hide-user-setting ">&nbsp;&nbsp;&nbsp;&nbsp;Settings</span></a></li>
+                    <li class="mt-3"><a href="#"> <i class="fa-solid fa-check-to-slot "></i><span class="hide-user-setting ">&nbsp;&nbsp;&nbsp;&nbsp;Billings</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-9">
+            <div class="content">
+                <div class="row  user-old-img-box">
+                    <div class=" col-md-3 user-info user-pic ">
+                            <img src="<%=user.photo%>" alt="User Avatar"> <!-- Replace 'user-photo.jpg' with your image path -->
+                    </div>
+                    <div class=" col-md-6 user-old-en  ">
+                        <p id="username" class="font-w-600"><%=user.name%></p>
+                        <p id="email" class="font-w-600"><%=user.email%></p>
+                    </div>
+                </div>
+                <br><br>
+                <form action="/listings/user/updateMe/<%=user._id%>"  method="POST" class="needs-validation px-4" novalidate enctype="multipart/form-data">
+                    <div class="mt-3 font-w-600" style="margin-left: 0.2rem;">
+                        <label for="username" class="form-label ">Username</label>
+                        <input id="username" value="<%=user.name%>" class="form-control"  type="text" name="name">
+                    </div>
+                    <div class="mt-3 font-w-600" style="margin-left: 0.2rem;">
+                        <label for="email" class="form-label ">Email</label>
+                        <input id="email" value="<%=user.email%>" class="form-control" type="text" name="email">
+                    </div>
+                    <div class="mt-3 mb-3 font-w-600" style="margin-left: 0.2rem;">
+                        <label for="photo" class="form-label">Change your photo</label>
+                        <input id="photo" name="photo" class="form-control" type="file" >
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-danger m-3  ">Save Changes</button>
+                    </div>
+                  
+                </div>
+                </form>
+                <hr>
+                <form action="/listings/user/changePassword/<%=user._id%>"  method="POST" class="needs-validation  mt-3 px-4" novalidate  >
+                    <div class="font-w-600 mt-3" style="margin-left: 0.2rem;">
+                        <label for="currentPassword" class="form-label">Current Password</label>
+                        <input id="email"  class="form-control" type="password" value="" name="passwordCurrent" required>
+                    </div>
+                    <div class="font-w-600 mt-3" style="margin-left: 0.2rem;">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password"  class="form-control"  type="password" value="" name="password" required>
+                    </div>
+                    <div class="font-w-600 mt-3 mb-3" style="margin-left: 0.2rem;">
+                        <label for="passwordConfirm" class="form-label">Confirm Password</label>
+                        <input id="passwordConfirm" name="passwordConfirm" class="form-control" type="password" value="" required>
+                    </div>
+
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-danger m-3  ">Change Password</button>
+                    </div>
+                    
+                </form>
+                <!-- Add more user info fields as needed -->
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+

@@ -1,0 +1,60 @@
+<div class="row ">
+    <div class="col m-3 p-3 ">
+      <h4 class=" mb-3 font-w-600">What this place offers</h4>
+      <div class="row mt-3">
+        <% p_style= data.amenities.includes('wifi')? '' : 'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-wifi ml-3"></i>&nbsp;&nbsp;Wifi
+        </div>
+        <% p_style= data.amenities.includes('washing_machine')? ''
+        :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-cash-register ml-3"></i>&nbsp;&nbsp;Washing Machine
+        </div>
+      </div>
+      <div class="row mt-3">
+        <% p_style= data.amenities.includes('washing_machine')? ''
+        :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-tv ml-3"></i>&nbsp;&nbsp;TV
+        </div>
+        <% p_style= data.amenities.includes('kitchen')? '' :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-kitchen-set ml-3"></i>&nbsp;&nbsp;Kitchen
+        </div>
+      </div>
+      <div class="row mt-3">
+        <% p_style= data.amenities.includes('fridge')? '' :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <img src="/fridge.png" alt="" srcset="" class="ml-3" />&nbsp;&nbsp;Fridge
+        </div>
+        <% p_style= data.amenities.includes('air_conditioning')? ''
+        :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-brands fa-galactic-republic ml-3"></i>&nbsp;&nbsp;Air conditioning
+        </div>
+      </div>
+      <div class="row mt-3">
+        <% p_style= data.amenities.includes('garden')? '' : 'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-tree-city ml-3"></i>&nbsp;&nbsp;Garden
+        </div>
+        <% p_style= data.amenities.includes('cooking_essentials')? ''
+        :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-utensils ml-3"></i>&nbsp;&nbsp;Cooking Essentials
+        </div>
+      </div>
+      <div class="row mt-3">
+        <% p_style= data.amenities.includes('iron')? '' : 'cross_text' %>
+        <div class="col <%=p_style%>">
+          <img src="/iron.png" alt="" class="ml-3" />&nbsp;&nbsp;Iron
+        </div>
+        <% p_style= data.amenities.includes('smooking')? '' :'cross_text' %>
+        <div class="col <%=p_style%>">
+          <i class="fa-solid fa-smoking ml-3"></i>&nbsp;&nbsp; Smooking allowed
+        </div>
+      </div>
+    </div>
+
+  </div>

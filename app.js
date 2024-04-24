@@ -1,53 +1,34 @@
-
-if(process.env.NODE_ENV != "production"){
-    require('dotenv').config();
-}
-
 const express = require("express");
 const app= express();
-const port= 8080;
-const mongoose= require('mongoose');
-const path= require("path");
-const methodOverride= require("method-override");
-const ExpressError= require("./utils/ExpressError.js");
-const listingsRouter =require("./routes/listing.js");
-const reviewsRouter =require("./routes/review.js");
-const userRouter =require("./routes/user.js");
-const session = require("express-session");
+const bodyparser = require("body-parser");
+const userRouter = require("./routes/userRoute");
+const listingRouter = require("./routes/listingRoute");
+const viewRouter =require("./routes/viewRoute");
+const bookingRouter =require("./routes/bokingRoute");
+const AppError= require("./utils/AppError");
+const globalErrorHandler =require("./controllers/ErrorController");
+const cookieParser =require("cookie-parser");
+const rateLimit = require("express-rate-limit");
+const mongoSenitise = require("express-mongo-sanitize");
 const MongoStore = require('connect-mongo');
+const path = require("path");
+const ejsmate = require("ejs-mate");
+const session = require("express-session");
+const methodOveride =require("method-override");
+
+
 const flash = require("connect-flash");
-const passport = require("passport");
-const LocalStrategy = require("passport-local");
-const User= require("./Model/User.js");
-
-let DBUrl = process.env.MongoDBUrl;
-
-main()
-    .then(()=>{
-        console.log("Database is connected");
-    })
-    .catch((err)=>{
-        console.log(err);
-    })
-
-
-async function main() {
-    await mongoose.connect(DBUrl);
-}
-
-
-const ejsmate= require("ejs-mate");
-const Review = require("./Model/Review.js");
-const router = require("./routes/listing.js");
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
-app.use(express.urlencoded({extended:true}));
-app.use(methodOverride("_method"));
-app.engine("ejs",ejsmate);
 app.use(express.static(path.join(__dirname,"public")));
+app.engine("ejs",ejsmate);
+app.use(methodOveride("_method"));
+
+
+const url = "mongodb://127.0.0.1:27017/Wanderlust";
 
 const store = MongoStore.create({
-    mongoUrl:DBUrl,
+    mongoUrl:url,
     crypto:{
         secret:process.env.SECRET
     },
@@ -70,48 +51,33 @@ const sessionoption={
     }
 }
 
-app.use(session(sessionoption));
 app.use(flash());
+app.use(session(sessionoption));
 
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+// const limiter = rateLimit({
+//     limits:1000,
+//     windowMs:60*60*1000,
+//     message :'Too many requests from this IP, please try again later in an hour!'
+// });
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// app.use(limiter);
+app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.json());
+app.use(cookieParser());
+app.use(mongoSenitise())
 
-app.use((req,res,next)=>{
-    res.locals.success = req.flash("success");
-    res.locals.error = req.flash("error");
-    res.locals.currUser = req.user;
-    next();
+
+
+app.use("/listings",viewRouter);
+app.use("/api/v1/user",userRouter);
+app.use("/api/v1/listings",listingRouter);
+app.use("/api/v1/bookings",bookingRouter);
+
+
+app.all("*",(req,res,next)=>{
+    next(new AppError(`Can't find ${req.originalUrl} on this server`,404));
 });
 
-// app.get("/demouser", async(req,res)=>{
 
-//     let fakeuser= new User({
-//         email:"student@123",
-//         username:"delat_student"
-//     });
-
-//     let registeredUser= await User.register(fakeuser,"helloworld");
-//     res.send(registeredUser);
-
-// })
-
-app.use("/listings",listingsRouter);
-app.use("/listings/:id/reviews",reviewsRouter);
-app.use("/",userRouter);
-
-app.get("*",(req,res,next)=>{
-    next( new ExpressError(404,"Page not Found"));
-})
-
-app.use((err,req,res,next)=>{
-    let {status=405, message="Something went Wrong"} = err;
-    res.status(status).render("error.ejs",{message});
-})
-
-app.listen(port,(req,res)=>{
-    console.log(`app is listening on port  ${port}`)
-})
+app.use(globalErrorHandler);
+module.exports=app;

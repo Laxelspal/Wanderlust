@@ -1,80 +1,314 @@
 <% layout('layout/boiler') -%>
-<div class="row mt-3">
-    <div class="col-8 offset-3">
-    <h3>Edit the Listing</h3>
+<div class="row m-3 d-flex justify-content-center">
+  <div class="col-md-8 ">
+    <h3 class="text-center mt-3 mb-3 font-w-600">Edit the Listing</h3>
+    <form
+      method="POST"
+      action="/listings/<%= listing._id %>?_method=PUT"
+      class="needs-validation"
+      novalidate
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label font-w-600 font-s-large"
+          >Title</label
+        >
+        <input
+          type="text"
+          name="listing[title]"
+          class="form-control"
+          value="<%=listing.title%>"
+          required
+        />
+        <div class="invalid-feedback">Tile is required !</div>
+      </div>
+      <div class="mb-3">
+        <label for="summary" class="form-label font-w-600 font-s-large"
+          >Summary of your home</label
+        >
+        <textarea
+          type="text"
+          name="listing[summary]"
+          cols="20"
+          rows="2"
+          class="form-control"
+        >
+<%=listing.summary%></textarea
+        >
+        <div class="invalid-feedback">Summary is Required !</div>
+      </div>
 
-    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
-        <div class="mt-3">
-            <label for="title" class="form-label"> Title</label>
-            <input type="text" name="listing[title]" value="<%= listing.title %>" class="form-control" required>
-            <div class="valid-feedback">Looks Good !</div>
-            <div class="invalid-feedback">Title is Required !</div>
-        </div>
+      <div class="mb-3">
+        <label for="description" class="form-label font-w-600 font-s-large"
+          >Description of your house</label
+        >
+        <textarea
+          type="text"
+          name="listing[description]"
+          cols="20"
+          rows="5"
+          class="form-control"
+        >
+<%=listing.description%>"</textarea
+        >
+        <div class="invalid-feedback">Description is Required !</div>
+      </div>
+      <div class="mt-3 font-w-600 font-s-large">
+        Original Cover Image <br />
+        <img src="<%= listing.coverImage %>" alt="" class="edit_img" />
+      </div>
 
-        <div class="mt-3">
-            <label for="description"  class="form-label">Description</label>
-            <textarea name="listing[description]"  cols="15" rows="5" class="form-control" required><%= listing.description %></textarea>
-            <div class="invalid-feedback">Description is Required !</div>
-        </div>
+      <div class="mt-3">
+        <label for="image" class="form-label font-w-600 font-s-large">
+          Upload new Cover Cover Image</label
+        >
+        <input type="file" name="coverImage" class="form-control" />
+      </div>
 
-        <div class="mt-3">
-            Original Listing Images <br>
-            <% for(url of originalUrl){%>
-                <img src="<%= url%>" alt="">
-            <%}%>
-        </div>
+      <div class="mt-3 font-w-600 font-s-large">
+        Original Listing Images <br />
+        <% for(url of listing.images){%>
+        <img src="<%= url%>" alt="" class="edit_img" />
+        <%}%>
+      </div>
 
-        <div class="mt-3">
-            <label for="image"  class="form-label"> Upload new Image</label>
-            <input type="file" name="listing[Images]" class="form-control" required multiple>
-        </div>
-      
+      <div class="mt-3">
+        <label for="image" class="form-label font-w-600 font-s-large" >
+          Upload new Images</label
+        >
+        <input
+          type="file"
+          name="images"
+          class="form-control"
+          multiple
+        />
+      </div>
 
+      <div class="mb-3 mt-3">
+        <h5 class="bold-text mt-3 font-s-large">Update your Amenities</h5>
+        <br />
         <div class="row">
-            <div class="mt-3 col-md-4"> Category : <%= listing.category %></div>
+          <div class="col-md-6 col-sm-4">
+            <input
+              type="checkbox"
+              name="amenities[wifi]"
+              id="wifi"
+              class="amenities_input"
+            />
+            <label for="wifi">
+              <i class="fa-solid fa-wifi m-3"></i>
+              Wifi
+            </label>
+          </div>
 
-            <select class=" form-select edit_select mt-3 " aria-label="Default select example" name="listing[category]" required>
-                <option selected>Select the category</option>
-                <option value="Trending">Trending</option>
-                <option value="Rooms" >Rooms</option>
-                <option value="Farms">Farms</option>
-                <option value="Arctic">Arctic</option>
-                <option value="Beach">Beach</option>
-                <option value="Castles" >Castles</option>
-                <option value="Amazing pools">Amazing pools</option>
-                <option value="Mountain">Mountain</option>
-                <option value="Lake">Lake</option>
-                <option value="Camping" >Camping</option>
-                <option value="Domes">Domes</option>
-                <option value="Boats">Boats</option>
-            
-            </select>
+          <div class="col-md-6 col-sm-4">
+            <input
+              type="checkbox"
+              name="amenities[washing_machine]"
+              id="washing_machine"
+              class="amenities_input"
+            />
+            <label for="washing_machine ">
+              <i class="fa-solid fa-cash-register m-3"></i>
+              Washing Machine
+            </label>
+          </div>
         </div>
-
         <div class="row">
-            <div class="mt-3 col-md-4">
-                <label for="price"  class="form-label"> Price</label>
-                <input type="number" name="listing[price]" value= "<%= listing.price %>" class="form-control" required>
-                <div class="invalid-feedback">Price is Required !</div>
-            </div>
-            
-            <div class="mt-3 col-md-8">
-                <label for="country"  class="form-label"> Country</label>
-                <input type="text" name="listing[country]" value="<%= listing.country %>"  class="form-control" required>
-                <div class="invalid-feedback">Country is Required !</div>
-            </div>
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[tv]"
+              id="tv"
+              class="amenities_input"
+            />
+            <label for="tv">
+              <i class="fa-solid fa-tv m-3"></i>
+              TV
+            </label>
+          </div>
+
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[kitchen]"
+              id="kitchen"
+              class="amenities_input"
+            />
+            <label for="kitchen ">
+              <i class="fa-solid fa-kitchen-set m-3"></i>
+              Kitchen
+            </label>
+          </div>
         </div>
-        
-        
-        <div class="mt-3">
-            <label for="location"  class="form-label">Location</label>
-            <input type="text" name="listing[location]" value="<%=listing.location%>" class="form-control" required>
-            <div class="invalid-feedback">Location is Required !</div>
+        <div class="row">
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[fridge]"
+              id="fridge"
+              class="amenities_input"
+            />
+            <label for="fridge">
+              <img src="/fridge.png" alt="" srcset="" class="m-3" />
+              Fridge
+            </label>
+          </div>
+
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[air_conditioning]"
+              id="air_conditioning"
+              class="amenities_input"
+            />
+            <label for="air_conditioning ">
+              <i class="fa-brands fa-galactic-republic m-3"></i>
+              Air conditioning
+            </label>
+          </div>
         </div>
-        
-        <button type="submit" class="btn btn-dark edit-btn mt-3">Edit</button>
-        <br><br>
+        <div class="row">
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[cooking_essentials]"
+              id="cooking_essentials"
+              class="amenities_input"
+            />
+            <label for="cooking_essentials">
+              <i class="fa-solid fa-utensils m-3"></i>
+              Cooking Essentials
+            </label>
+          </div>
+
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[garden]"
+              id="garden"
+              class="amenities_input"
+            />
+            <label for="garden ">
+              <i class="fa-solid fa-tree-city m-3"></i>
+              Garden
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[iron]"
+              id="iron"
+              class="amenities_input"
+            />
+            <label for="iron">
+              <img src="/iron.png" alt="" class="m-3" />
+              Iron
+            </label>
+          </div>
+
+          <div class="col-md-6 col-sm-4 amenities_item">
+            <input
+              type="checkbox"
+              name="amenities[smooking]"
+              id="sooking"
+              class="amenities_input"
+            />
+            <label for="smooking ">
+              <i class="fa-solid fa-smoking m-3"></i> Smooking allowed
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mt-3 col-md-4">Category : <%= listing.category %></div>
+
+        <div class="col ml-3">
+          <h5 class="font-s-large">Chanege Listing Category</h5>
+          <select
+            class="form-select edit_select mt-3"
+            aria-label="Default select example"
+            name="listing[category]"
+            required
+          >
+            <option selected value="<%= listing.category %>">
+              <%=listing.category%>
+            </option>
+            <option value="Trending">Trending</option>
+            <option value="Rooms">Rooms</option>
+            <option value="Farms">Farms</option>
+            <option value="Arctic">Arctic</option>
+            <option value="Beach">Beach</option>
+            <option value="Castles">Castles</option>
+            <option value="Amazing pools">Amazing pools</option>
+            <option value="Mountain">Mountain</option>
+            <option value="Lake">Lake</option>
+            <option value="Camping">Camping</option>
+            <option value="Ski-in">Ski-in/out</option>
+            <option value="Domes">Domes</option>
+            <option value="New">New</option>
+            <option value="Tower">Tower</option>
+            <option value="Chef's">Kitchen</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mt-3 col-md-4">
+          <label for="price" class="form-label font-w-600 font-s-large"> Price</label>
+          <input
+            type="number"
+            name="listing[price]"
+            value="<%= listing.price %>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Price is Required !</div>
+        </div>
+        <div class="mt-3 col-md-6 ml-3">
+          <label for="location" class="form-label font-w-600 font-s-large">Location</label>
+          <input
+            type="text"
+            name="listing[location]"
+            value="<%=listing.location.address%>"
+            class="form-control"
+            required
+          />
+          <div class="invalid-feedback">Location is Required !</div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="mb-3 col-md-4">
+          <label for="bedrooms" class="form-label font-w-600 font-s-large"
+            >Number of bedrooms</label
+          >
+          <input
+            type="number"
+            name="listing[bedrooms]"
+            class="form-control"
+            value="<%=listing.bedrooms%>"
+          />
+        </div>
+
+        <div class="mb-3 col-md-6 ml-3">
+          <label for="maxguests" class="form-label font-w-600 font-s-large"
+            >Number of maxguests</label
+          >
+          <input
+            type="number"
+            name="listing[maxGuests]"
+            class="form-control"
+            value="<%=listing.maxGuests%>"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-dark edit-btn mt-3 p-3">Update the listing</button>
+      <br /><br />
     </form>
-    </div>
+  </div>
 </div>
 <script src="/js/script.js"></script>
