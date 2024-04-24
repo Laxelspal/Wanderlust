@@ -1,4 +1,4 @@
-services:
+service:
   - name: laxmi-airbnb
     buildCommand: npm install
     env:
