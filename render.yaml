@@ -1,0 +1,6 @@
+services:
+  - name: laxmi-airbnb
+    buildCommand: npm install
+    env:
+      - key: NODE_VERSION
+        value: 20.9.0
