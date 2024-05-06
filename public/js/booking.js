@@ -8,7 +8,7 @@ bookingbtn.addEventListener("click",async(e)=>{
     // console.log(listingId);
 
     try{
-       let res= await axios.get(`http://localhost:8080/api/v1/bookings/checkout-session/${listingId}`);
+       let res= await axios.get(`/api/v1/bookings/checkout-session/${listingId}`);
        console.log(res);
        let session=res.data.session;
 

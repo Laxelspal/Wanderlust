@@ -18,7 +18,7 @@ const upload = multer({
 
 module.exports.uploadListingImages =  upload.fields([
   { name: 'coverImage', maxCount: 1 },
-  { name: 'images', maxCount: 3 }
+  { name: 'images', maxCount: 7 }
 ])
 
 module.exports.uploadUserPhoto = upload.single('photo');

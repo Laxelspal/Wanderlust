@@ -11,7 +11,7 @@
        zoom: 8 // starting zoom
     });
 
-console.log(listing);
+// console.log(listing);
 map.addControl(new mapboxgl.NavigationControl());
 
 const marker1 = new mapboxgl.Marker({color:"red"})

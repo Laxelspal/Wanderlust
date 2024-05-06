@@ -94,7 +94,13 @@
         &#8377; <%= data.price.toLocaleString("en-IN")%> /night
       </p>
       <% if(currUser) {%>
-      <div class="reserve_div ml-3 mr-3" id="booking" data-listing-id="<%=data._id%>">Reserve</div>
+        <% if(!bookings.includes(data.id)) { %>
+          <div class="reserve_div ml-3 mr-3" id="booking" data-listing-id="<%=data._id%>">Reserve</div>
+        <%}%>
+        <% if(bookings.includes(data.id)) { %>
+          <div class="reserve_div ml-3 mr-3 bg-secondary" >Sold out</div>
+        <%}%>
+
       <%}%>
       <% if(!currUser) {%>
        <a href="/listings/login"><div class="reserve_div ml-3 mr-3">Login To Reserve</div></a> 

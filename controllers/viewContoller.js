@@ -7,6 +7,7 @@ const Review = require("../Model/ReviewModel.js");
 
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken =  process.env.MAP_TOKEN;
+// console.log("Map token",process.env.MAP_TOKEN);
 const geocodingClient = mbxGeocoding({ accessToken: mapToken });
 
 const cloudinary =require("../cloudConfig.js");
@@ -29,7 +30,8 @@ module.exports.addNewListing =(req,res,next)=>{
 }
 module.exports.showListing =catchAsync(async(req,res,next)=>{
     let data = await Listing.findById(req.params.id).populate({path:"reviews"}).populate({path:"owner"});
-    res.render("listings/show.ejs",{data});
+    let bookings = await Booking.find();
+    res.render("listings/show.ejs",{data,bookings});
 });
 
 module.exports.getEditPage= CatchAsync(async(req,res,next)=>{
