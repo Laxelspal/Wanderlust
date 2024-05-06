@@ -30,7 +30,7 @@ module.exports.addNewListing =(req,res,next)=>{
 }
 module.exports.showListing =catchAsync(async(req,res,next)=>{
     let data = await Listing.findById(req.params.id).populate({path:"reviews"}).populate({path:"owner"});
-    let bookings = await Booking.find();
+    let bookings = await Booking.find({listing:req.params.id});
     res.render("listings/show.ejs",{data,bookings});
 });
 
