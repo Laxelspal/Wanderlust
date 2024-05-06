@@ -94,7 +94,7 @@
         &#8377; <%= data.price.toLocaleString("en-IN")%> /night
       </p>
       <% if(currUser) {%>
-        <% if(booking.length==0) { %>
+        <% if( bookings.length==0) { %>
           <div class="reserve_div ml-3 mr-3" id="booking" data-listing-id="<%=data._id%>">Reserve</div>
         <%}%>
         <% if(bookings.length>0) { %>
