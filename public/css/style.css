@@ -219,39 +219,49 @@ body{
 
 footer{
     height:fit-content;
-    background-color: #ebebeb;
+    background-color: #fff;
+    padding: 1rem;
+    border-top: 1px solid rgb(186, 180, 180);
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
 }
-
-.f-info-socials, .f-info-links,.f-info-company{
+.footer-box{
+    padding: 1rem;
+    width:25rem;
+}
+.footer-a{
+    color: #000;
+    line-height: 1.5rem;
+}
+.footer-box i{
+    cursor: pointer;
+}
+.footer-icon-box{
+    height: 2rem;
+    width:2rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    width:100%;
-}
-.f-info-links a{
-    text-decoration: none;
-    color: #222222;
-    margin: 1rem;
-}
-
-.f-info-links{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-}
-.f-info-socials i{
-    margin: 1rem;
-    font-size: 1.2rem;
+    background-color: #e5e1e1;
+    border-radius: 50%;
     cursor: pointer;
+    margin-left: 1rem;
 }
-.f-info-socials i:hover{
-    transform: scale(1.1);
+.footer-icon-box i{
+    font-size: 0.8rem;
+}
+.footer-icon-box:hover{
+    background-color: #c1bfbf;
 }
 
-.f-info-links a:hover{
-    text-decoration: underline;
-    
+.footer-a:hover{
+    font-weight: 600;
 }
+.footer-a li{
+    list-style: none;
+}
+
 
 /* Sign page style */
 .signup_card{

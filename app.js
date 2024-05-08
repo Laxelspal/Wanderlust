@@ -28,7 +28,7 @@ let DBUrl = process.env.MongoDBUrl;
 const url = "mongodb://127.0.0.1:27017/Wanderlust";
 
 const store = MongoStore.create({
-    mongoUrl:DBUrl,
+    mongoUrl:url,
     crypto:{
         secret:process.env.SECRET
     },
