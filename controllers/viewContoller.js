@@ -25,6 +25,17 @@ module.exports.getLogin =(req,res,next)=>{
     res.render("user/login.ejs");
 }
 
+module.exports.updateMe =CatchAsync(async(req,res,next)=>{
+    // console.log(req.body);
+    const doc = await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
+    if(!doc){
+        return next(new AppError('No document found with this ID',404));
+    }
+    req.flash("success","your Information Updated successfully");
+    res.redirect(`/listings/user/${req.params.id}`);
+
+});
+
 module.exports.addNewListing =(req,res,next)=>{
     res.render("listings/new.ejs");
 }
@@ -164,6 +175,24 @@ module.exports.filterCategory =CatchAsync(async(req,res,next)=>{
 module.exports.getUserBooking =catchAsync(async (req,res,next)=>{
     const bookings = await Booking.find({user:req.user._id});
     res.render("listings/booking.ejs",{bookings});
+});
+
+module.exports.createReview = CatchAsync(async(req,res,next)=>{
+    // console.log(req.body);
+    await Review.create(req.body);
+    let {listingId} =req.params;
+    req.flash("success","Your review successfully added");
+    res.redirect(`/listings/${listingId}`);
+});
+module.exports.deleteReview = CatchAsync(async(req,res,next)=>{
+    const doc =await Review.findByIdAndDelete(req.params.id);
+    let {listingId} =req.params;
+    if(!doc){
+        return next(new AppError('No review found with this ID',404));
+    }
+    
+    req.flash("success","Review deleted successfully");
+    res.redirect(`/listings/${listingId}`);
 });
 
 module.exports.getAllReviews=catchAsync(async(req,res,next)=>{

@@ -39,11 +39,11 @@ router.post("/resetPassword/:token",authcontroller.resetPassword);
 router.get("/new",authcontroller.protect,viewController.addNewListing);
 router.get("/:id/edit",viewController.getEditPage);
 
-router.post("/:listingId/reviews",reviewController.setListingUserIds, handleFactory.createOne(Review));
-router.delete("/:listingId/reviews/:id",authcontroller.protect, handleFactory.deleteOne(Review));
+router.post("/:listingId/reviews",reviewController.setListingUserIds, viewController.createReview);
+router.delete("/:listingId/reviews/:id",authcontroller.protect, viewController.deleteReview);
 
 
-router.post("/user/updateMe/:id",multer.uploadUserPhoto,viewController.uploadUserPhotoCloudinary,handleFactory.updateOne(User));
+router.post("/user/updateMe/:id",multer.uploadUserPhoto,viewController.uploadUserPhotoCloudinary,viewController.updateMe);
 router.post("/user/changePassword/:id",authcontroller.updatePassword);
 
 router.get("/user/wishlist",authcontroller.protect,viewController.getAllFavorites);

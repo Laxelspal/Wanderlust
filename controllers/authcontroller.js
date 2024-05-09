@@ -7,7 +7,7 @@ const sendEmail= require("../utils/Email.js")
 const crypto= require("crypto");
 
 module.exports.signup = CatchAsync(async (req, res, next) => {
-    console.log(req.body);
+    console.log("This is user info",req.body);
     const newuser = await User.create({
         name: req.body.name,
         email: req.body.email,
@@ -149,7 +149,7 @@ exports.forgetPassword = CatchAsync(async(req,res,next)=>{
     else{
         resetUrl =`${req.protocol}://${req.get('host')}/listings/resetPassword/${resetToken}`;
     }
-    const message = `Forget your password ? submit a patch request with the your new password and passwordConfirm to : ${resetUrl}./n If you didn't forget your password please ignore this email !! `;
+    const message = `Forget your password ? submit a patch request with the your new password and passwordConfirm to : ${resetUrl}  /n If you didn't forget your password please ignore this email !! `;
 
     try{
         await sendEmail({
@@ -197,11 +197,13 @@ module.exports.resetPassword= CatchAsync(async(req,res,next)=>{
 
     //3) update changedPasswordAt property for the user
     //4) Login the user and swnd the Jwt Token
-    createSendToken(user,200,req,res);
+    let redirectUrl = `/listings`;
+    let message =`your password reset successfully`;
+    createSendToken(user,200,req,res,redirectUrl,message);
 
 });
 
-const createSendToken =(user,statusCode,req,res)=>{
+const createSendToken =(user,statusCode,req,res, redirectUrl="/listings", message="you login successfully")=>{
     const token = signToken(user._id);
     const cookieOptions={
         expires:new Date(Date.now()+ process.env.JWT_COOKIE_EXPIRES_IN*24*60*60*1000),
@@ -225,8 +227,8 @@ const createSendToken =(user,statusCode,req,res)=>{
         })
     }
 
-    req.flash("success"," you successfully log in your account");
-    res.redirect("/listings");    
+    req.flash("success",message);
+    res.redirect(redirectUrl);    
 };
 
 module.exports.updatePassword = CatchAsync(async(req,res,next)=>{
@@ -245,7 +247,9 @@ module.exports.updatePassword = CatchAsync(async(req,res,next)=>{
     user.passwordConfirm= req.body.passwordConfirm;
 
     await user.save();
-    createSendToken(user,200,req,res);
+    let redirectUrl = `/listings/user/${req.user.id}`;
+    let message =`you password updated successfully`;
+    createSendToken(user,200,req,res ,redirectUrl,message);
 });
 module.exports.logout = (req, res) => {
     res.cookie('jwt1', 'loggedout', {

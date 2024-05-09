@@ -15,7 +15,7 @@ await mongoose.connect("mongodb://127.0.0.1:27017/Wanderlust");
 
 const initilData = async()=>{
     await  Listing.deleteMany({});
-    initDB.data = initDB.data.map((listing)=>({...listing,owner:"662866dad32b6b4395d833d1"}));
+    initDB.data = initDB.data.map((listing)=>({...listing,owner:"663b45d92cb08f5229c17fd5"}));
     await Listing.insertMany(initDB.data);
     console.log("Data is initialized");
 }

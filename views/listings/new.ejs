@@ -1,6 +1,6 @@
 <% layout('layout/boiler') -%>
 <div class="row m-3">
-    <div class="col-8 offset-lg-2" >
+    <div class="col-8 offset-lg-2" style="background-color: #fff; border-radius: 1rem;">
     <br>
 
     <div class="new_top_box row">
@@ -14,7 +14,7 @@
     </div>
     
 
-    <form method="POST" action="/listings"  class=" needs-validation"  novalidate enctype="multipart/form-data">
+    <form method="POST" action="/listings"  class=" needs-validation p-3"  novalidate enctype="multipart/form-data">
         <div class="mb-3">
             <h5 class="font-w-600 mt-3 ">Give your house a title</h5>
             <input type="text" name="listing[title]" 
@@ -86,16 +86,16 @@
             <h5 class="bold-text mt-3">Amenities</h5>
             <br>
             <div class="row">
-                <div class="col-md-6 col-sm-4 cursor-pointer">
-                    <input type="checkbox" name="amenities[wifi]" id="wifi" class="amenities_input">
+                <div class="col-md-6 col-sm-4 cursor_pointor" >
+                    <input type="checkbox" name="amenities[wifi]" id="wifi" class="amenities_input cursor_pointor">
                     <label for="wifi">
                         <i class="fa-solid fa-wifi m-3"></i>
                         Wifi
                     </label>
                 </div>
                 
-                <div class="col-md-6 col-sm-4 cursor-pointer">
-                    <input type="checkbox" name="amenities[washing_machine]" id="washing_machine" class="amenities_input">
+                <div class="col-md-6 col-sm-4 cursor_pointor">
+                    <input type="checkbox" name="amenities[washing_machine]" id="washing_machine" class="amenities_input cursor_pointor">
                     <label for="washing_machine ">
                         <i class="fa-solid fa-cash-register m-3"></i>
                         Washing Machine
@@ -105,16 +105,16 @@
                 
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[tv]" id="tv" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[tv]" id="tv" class="amenities_input cursor_pointor">
                     <label for="tv">
                         <i class="fa-solid fa-tv m-3"></i>
                         TV
                     </label>
                 </div>
                 
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[kitchen]" id="kitchen" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[kitchen]" id="kitchen" class="amenities_input cursor_pointor">
                     <label for="kitchen ">
                         <i class="fa-solid fa-kitchen-set m-3"></i>
                         Kitchen
@@ -124,16 +124,16 @@
                 
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[fridge]" id="fridge" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[fridge]" id="fridge" class="amenities_input cursor_pointor">
                     <label for="fridge">
                         <img src="/fridge.png" alt="" srcset=" " class="m-3">
                         Fridge
                     </label>
                 </div>
                 
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[air_conditioning]" id="air_conditioning" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[air_conditioning]" id="air_conditioning" class="amenities_input cursor_pointor">
                     <label for="air_conditioning ">
                         <i class="fa-brands fa-galactic-republic m-3"></i>
                         Air conditioning
@@ -143,16 +143,16 @@
                 
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[cooking_essentials]" id="cooking_essentials" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[cooking_essentials]" id="cooking_essentials" class="amenities_input cursor_pointor">
                     <label for="cooking_essentials">
                         <i class="fa-solid fa-utensils m-3"></i>
                         Cooking Essentials
                     </label>
                 </div>
                 
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[garden]" id="garden" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[garden]" id="garden" class="amenities_input cursor_pointor">
                     <label for="garden ">
                         <i class="fa-solid fa-tree-city m-3"></i>
                         Garden
@@ -162,17 +162,17 @@
                 
             </div>
             <div class="row">
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[iron]" id="iron" class="amenities_input">
+                <div class="col-md-6 col-sm-4 amenities_item cursor_pointor">
+                    <input type="checkbox" name="amenities[iron]" id="iron" class="amenities_input cursor_pointor">
                     <label for="iron">
                         <img src="/iron.png" alt="" class="m-3">
                         Iron
                     </label>
                 </div>
                 
-                <div class="col-md-6 col-sm-4 amenities_item cursor-pointer">
-                    <input type="checkbox" name="amenities[smooking]" id="sooking" class="amenities_input">
-                    <label for="smooking ">
+                <div class="col-md-6 col-sm-4 amenities_item r">
+                    <input type="checkbox" name="amenities[smooking]" id="sooking" class="amenities_input cursor_pointor">
+                    <label for="smooking " >
                         <i class="fa-solid fa-smoking m-3"></i> Smooking allowed
                     </label>
                     

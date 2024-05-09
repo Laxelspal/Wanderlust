@@ -4,6 +4,13 @@ const sendEmail = async(options)=>{
 
     //1) Create a transproter
     let transporter;
+    // transporter= nodemailer.createTransport({
+    //           service: 'gmail',
+    //           auth: {
+    //             user: process.env.GAMIL_NAME,
+    //             pass: process.env.GMAIL_PASSWORD
+    //           }
+    // });
     if (process.env.NODE_ENV === 'production') {
         // Sendgrid
         transporter= nodemailer.createTransport({

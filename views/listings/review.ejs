@@ -6,7 +6,8 @@
       action="/listings/<%= data._id%>/reviews"
       method="POST"
       novalidate
-      class="needs-validation"
+      class="needs-validation px-2"
+      style="background-color: #fff;"
     >
       <div>
         <label for="rating" class="from-label mt-3 mb-3">Rating</label>
@@ -78,31 +79,33 @@
     <% }%> 
     <% if(data.reviews.length>0){%>
     <div class="row">
-      <h5><b> All Review</b></h5>
+      <h4 class="bold-text"> All Review</h4>
 
-      <div class="row">
+      <div class="d-flex overflow-x-auto">
         <% for(review of data.reviews){ %>
-        <div class="card m-3  p-3 pb-1 review_card text-center">
-          <div class="card_body">
-            <div class="">
-              <img src="<%=review.user.photo%>" alt="" srcset="" class="owner_img">
-              <span class="font-w-600"><%= review.user.name%></span>
-            </div>
-            
-            <p class="card-text"><%= review.comment%></p>
+        <div class=" m-3 p-3 review_card">
+          
+          <img src="<%=review.user.photo%>" alt="" srcset="" class="review-img" >
+          <div style="width: 15rem;">
+            <br>
+            <div class="font-w-600 mb-1 "style="font-size: 1rem;" ><%= review.user.name%></div>
             <% for(let k=1;k<=review.rating;k++){ %>
-              <i class="fa-solid fa-star font-s-1 "></i>
+              <i class="fa-solid fa-star " style="font-size: 0.7rem;"></i>
             <%}%>
-          </div>
-          <% if(currUser && review.user._id.equals(currUser._id))  {%>
-          <form
-            action="/listings/<%= data.id%>/reviews/<%= review._id%>?_method=DELETE"
-            method="POST"
-            class="mb-3"
-          >
-            <button class="btn btn-sm btn-dark mt-3">Delete</button>
-          </form>
-          <%}%>
+            <p class="card-text mt-1 "><%= review.comment%></p>
+            
+            <% if(currUser && review.user._id.equals(currUser._id))  {%>
+              <form
+                action="/listings/<%= data.id%>/reviews/<%= review._id%>?_method=DELETE"
+                method="POST"
+                class="mb-3"
+              >
+              <button class="btn btn-sm btn-danger ">Delete</button>
+              </form>
+              <%}%>
+
+          </div> 
+          
         </div>
         <%}%>
       </div>

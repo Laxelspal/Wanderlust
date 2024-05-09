@@ -54,11 +54,7 @@ const sessionoption={
 app.use(flash());
 app.use(session(sessionoption));
 
-// const limiter = rateLimit({
-//     limits:1000,
-//     windowMs:60*60*1000,
-//     message :'Too many requests from this IP, please try again later in an hour!'
-// });
+
 
 // app.use(limiter);
 app.use(bodyparser.urlencoded({extended:true}));
