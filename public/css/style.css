@@ -82,14 +82,22 @@ body{
     padding: 0.5rem 3rem 0.5rem 3rem;
 }
 .user_logo{
+    cursor: pointer;
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center
+}
+.user_menu{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-radius: 0.5rem;
-    min-width: 3.2rem;
+    min-width: 3rem;
     height: 2.5rem;
-    cursor: pointer;
-    box-shadow: 1px 1px 2px #9c9b9b;
+    border-radius: 0.5rem;
+    box-shadow: 1px 1px 1px #9c9b9b;
+    border: 1px solid #8b8383;
 }
 .user_icon{
     padding: 0.3rem;

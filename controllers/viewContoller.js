@@ -3,6 +3,7 @@ const Listing = require("../Model/listingModel");
 const User = require("../Model/UserModel.js");
 const Booking =require("../Model/bookingModel.js");
 const Review = require("../Model/ReviewModel.js");
+const AppError =require("../utils/AppError.js")
 
 
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
@@ -29,7 +30,7 @@ module.exports.updateMe =CatchAsync(async(req,res,next)=>{
     // console.log(req.body);
     const doc = await User.findByIdAndUpdate(req.params.id,req.body,{new:true,runValidators:true});
     if(!doc){
-        return next(new AppError('No document found with this ID',404));
+        return next(new AppError('No User found with this ID',404));
     }
     req.flash("success","your Information Updated successfully");
     res.redirect(`/listings/user/${req.params.id}`);
@@ -41,12 +42,20 @@ module.exports.addNewListing =(req,res,next)=>{
 }
 module.exports.showListing =catchAsync(async(req,res,next)=>{
     let data = await Listing.findById(req.params.id).populate({path:"reviews"}).populate({path:"owner"});
+    if(!data){
+        req.flash("error","No listing found with this ID");
+        return res.redirect(`/listings`);
+    }
     let bookings = await Booking.find({listing:req.params.id});
     res.render("listings/show.ejs",{data,bookings});
 });
 
 module.exports.getEditPage= CatchAsync(async(req,res,next)=>{
     let listing= await Listing.findById(req.params.id);
+    if(!listing){
+        req.flash("error","No listing found with this ID");
+        return res.redirect(`/listings`);
+    }
     res.render("listings/edit.ejs",{listing});
 });
 module.exports.getUser=catchAsync(async(req,res,next)=>{
@@ -108,6 +117,10 @@ module.exports.addListing = catchAsync(async(req,res,next)=>{
 
 module.exports.updateListing = CatchAsync(async(req,res,next)=>{
     let listing=await Listing.findByIdAndUpdate(req.params.id,{...req.body.listing},{new:true,runValidators:true});
+    if(!listing){
+        req.flash("error","No listing found with this ID");
+        return res.redirect(`/listings`);
+    }
     req.flash("success"," you successfully updated your listing");
     res.redirect("/listings")
 });
@@ -136,6 +149,10 @@ module.exports.getDisatnceListings= catchAsync(async(req,res,next)=>{
             }
         }
     });
+    if(listings.length==0){
+        req.flash("error","No listing found  in this place");
+        return res.redirect(`/listings`);
+    }
     res.render("listings/search.ejs",{listings,place,location});
 });
 
@@ -174,6 +191,10 @@ module.exports.filterCategory =CatchAsync(async(req,res,next)=>{
 
 module.exports.getUserBooking =catchAsync(async (req,res,next)=>{
     const bookings = await Booking.find({user:req.user._id});
+    if(!bookings){
+        req.flash("error","No booking are done by this user");
+        return res.redirect(`/user/Profile.ejs`);
+    }
     res.render("listings/booking.ejs",{bookings});
 });
 

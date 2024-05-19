@@ -15,14 +15,27 @@
     <!-- nav right -->
     <div class="navbar-nav  right ms-auto nav_right">
       <a class="nav-link nav_hover nav_hide " href="/listings/new" style="margin-right: 1rem;">Switch to hosting</a>
+
       <div class="user_logo">
-         <div class="user_menu">
-          <i class="fa-solid fa-bars"></i>
-         </div>
-         <div class="user_icon hide">
-            <i class="fa-solid fa-user"></i>
-         </div>
-      </div>
+        <% if(typeof user ==='undefined' ) { %>
+          <div class="user_menu " >
+            <i class="fa-solid fa-bars"></i>
+          </div>
+        
+        <%}%>
+        <% if(typeof user !=='undefined' ) { %> 
+          <img
+            src="<%=user.photo%>"
+            alt=""
+            srcset=""
+            class="ml-3"
+            style="height:2.2rem;width:2.2rem; border-radius: 50%;"
+  
+            />
+            <span style="font-size: 0.8rem;">me</span>
+        <%}%>
+      </div>  
+    
     </div>
 
   </div>
