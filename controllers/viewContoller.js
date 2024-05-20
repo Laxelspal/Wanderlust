@@ -186,6 +186,10 @@ module.exports.getAllFavorites= catchAsync(async(req,res,next)=>{
 module.exports.filterCategory =CatchAsync(async(req,res,next)=>{
     let {category}=req.params;
     let data = await Listing.find({category:category});
+    if(data.length==0){
+        req.flash("error","No listing found with this filter ");
+        return res.redirect(`/listings`);
+    }
     res.render("listings/index.ejs",{data});
 });
 
